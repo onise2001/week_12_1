@@ -31,8 +31,6 @@ def search(request, title):
 
 
 
-
-
 def add(request):
 
     if request.method == "POST":
