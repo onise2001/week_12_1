@@ -4,14 +4,13 @@ from .models import Event
 # Create your views here.
 
 def index(request):
-
     if request.method == "POST":
-        search = request.POST.get('search')
-        events = Event.objects.filter(title__contains=search)
-        context = {
-            "events": events
-        }
-        return render(request, "planner/index.html", context)
+       search = request.POST.get('search')
+       events = Event.objects.filter(title__contains=search)
+       context = {
+           "events": events
+       }
+       return render(request, "planner/index.html", context)
 
 
     events = Event.objects.all()
@@ -19,6 +18,19 @@ def index(request):
         "events": events
     }
     return render(request, "planner/index.html", context)
+
+
+
+def search(request, title):
+    
+    event = Event.objects.filter(title=f"{title}")
+    context = {
+        "event": event[0]
+    }
+    return render(request, "planner/event.html", context)
+
+
+
 
 
 def add(request):
